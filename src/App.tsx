@@ -11,6 +11,7 @@ function App() {
     <>
       <Timer />
       <Users />
+      <RandomNumber />
     </>
   );
 }
@@ -82,12 +83,32 @@ function Users() {
     </div>
   );
 }
-function RandomNumber() {
+const RandomNumber = () => {
+  const [number, setNumber] = useState(null);
+
+  const generateNumber = () => {
+    setNumber(Math.floor(Math.random() * 200));
+  };
+  const getNumberType = () => {
+    if (number === null) return null;
+    return number % 2 === 0 ? "even" : "odd";
+  };
   return (
-    <div>
-      <h2>Random Number</h2>
-      <button onClick={(Math.floor(Math.random() * 200)}></button>
+    <div className="p-4 text-center">
+      <h2 className="text-xl font-bold mb-4">Random Number</h2>
+      <button
+        onClick={generateNumber}
+        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+      >
+        Generate Number
+      </button>
+      {number !== null && (
+        <div className="mt-4">
+          <p className="text-lg">Your random number is: {number}</p>
+          <p className="text-lg mt-2">This number is {getNumberType()}</p>
+        </div>
+      )}
     </div>
-  )
-}
+  );
+};
 export default App;
