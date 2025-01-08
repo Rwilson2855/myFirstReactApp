@@ -34,5 +34,17 @@ function App() {
     </>
   )
 }
+function Timer() {
+const [remainingTime, setRemainingTime] = useState(21)
+return (
+  <div>
+    <h2>Timer</h2>
+    <p>{remainingTime} seconds remaining</p>
+    <button onClick={() => setRemainingTime(remainingTime - 1)}></button>
+    -1 second
+  </div>
+)
+}
 
+Timer();
 export default App
