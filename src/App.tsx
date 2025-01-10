@@ -7,7 +7,7 @@ function App() {
     { id: 2, title: "Learn React", owner: "John" },
     { id: 3, title: "Learn React", owner: "John" },
   ]);
-
+  const [sortBy, setSortBy] = useState("all");
   const addTodo = (title, owner) => {
     const newTodo = {
       id: todos.length + 1,
@@ -21,10 +21,30 @@ function App() {
     setTodos(todos.filter(todo => todo.id !== id));
   };
 
+  const uniqueOwners = [...new Set(todos.map(todo => todo.owner))];
+
+  const filteredTodos = sortBy === "all"
+    ? todos
+    : todos.filter(todo => todo.owner === sortBy);
+
   return (
     <div className="App">
       <TodoInput onAdd={addTodo} />
-      <TodoList todos={todos} onRemove={removeTodo} />
+      <div style={{ padding: "20px"}}>
+        <label>
+          Filter by owner:
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+          >
+            <option value="all">All owners</option>
+            {uniqueOwners.map(owner => (
+              <option key={owner} value={owner}>{owner}</option>
+            ))}
+          </select>
+        </label>
+      </div>
+      <TodoList todos={filteredTodos} onRemove={removeTodo} />
     </div>
   );
 }
