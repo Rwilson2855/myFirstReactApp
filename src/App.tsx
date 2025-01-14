@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import { Button } from '@mui/material'
+import Button from '@mui/material/Button';
 
 function App() {
   const [todos, setTodos] = useState([
@@ -84,7 +84,7 @@ function TodoInput({ onAdd }) {
           value={todoTitle}
         />
       </label>
-      <button onClick={handleSubmit}>Add Todo</button>
+      <Button onClick={handleSubmit}>Add Todo</Button>
     </div>
   );
 }
@@ -103,7 +103,7 @@ function TodoList({ todos, onRemove }) {
         <div key={todo.id}>
           <h3>{todo.title}</h3>
           <p>Owner: {todo.owner}</p>
-          <button onClick={() => onRemove(todo.id)}>Delete</button>
+          <Button onClick={() => onRemove(todo.id)}>Delete</Button>
         </div>
       ))}
     </div>
